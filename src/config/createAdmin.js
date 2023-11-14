@@ -8,7 +8,7 @@ async function createAdminUser() {
        
         console.log("admin already exist")
         return
-    }
+    };
     try {
         const newUser = await User.create({
             firstName: "admin",

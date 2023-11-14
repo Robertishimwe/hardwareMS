@@ -18,6 +18,9 @@ module.exports = {
       product_id: {
         type: Sequelize.INTEGER
       },
+      inventory_id: {
+        type: Sequelize.INTEGER
+      },
       quantity_sold: {
         type: Sequelize.DECIMAL
       },

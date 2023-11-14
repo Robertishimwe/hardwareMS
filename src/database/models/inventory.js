@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         as: 'product' // for descriptive queries
       });
+
+      Inventory.hasOne(models.Transaction, {
+        foreignKey: 'inventoryId',
+        onDelete: 'CASCADE',
+        as: 'transaction', // for descriptive queries
+      });
       // define association here
     }
   }
