@@ -58,7 +58,7 @@ class ProductService {
 
       return product;
     } catch (error) {
-      throw new Error('Error checking product');
+      throw new Error(`Error checking product${error}`);
     }
   }
 }

@@ -6,7 +6,7 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/create", UnitOfMeasurementsController.createUnitOfMeasurement);
-router.use('/getAll', UnitOfMeasurementsController.getAllUnitsOfMeasurement)
+router.get('/getAll', UnitOfMeasurementsController.getAllUnitsOfMeasurement)
 // router.post("/login", authController.login)
 
 module.exports = router;

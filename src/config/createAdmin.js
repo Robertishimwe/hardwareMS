@@ -18,7 +18,6 @@ async function createAdminUser() {
             role: "admin",
             password: await Protection.hashPassword("123")
         });
-        console.log(adminuser)
         console.log('New user created:', newUser.toJSON());
 
         return newUser;

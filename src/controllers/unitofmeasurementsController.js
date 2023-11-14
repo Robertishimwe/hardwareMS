@@ -7,12 +7,10 @@ class UnitOfMeasurementsController {
     static createUnitOfMeasurement = async (req, res) => {
         try {
             const check = {
-                UnitOfMeasurements: req.body.UnitOfMeasurements,
+                unit_name: req.body.unit_name,
             };
             await checkUnitOfMeasurement(check);
-            const Unit = await createUnitOfMeasurement({
-                UnitOfMeasurements: req.body.UnitOfMeasurements
-            });
+            const Unit = await createUnitOfMeasurement(check);
             return res.status(201).json({ message: "UnitOfMeasurements was added successful", Unit: Unit })
         } catch (error) {
             if (error.message === 'Found') {
