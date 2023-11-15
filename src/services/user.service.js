@@ -2,7 +2,7 @@ const { User } = require('../database/models')
 
 class UserService {
     static createUser = async (data) => {
-        const user = await User.create(data);
+        const user = await User.create(data, {attributes: { exclude: ['password'] }});
         return user;
     };
 
@@ -26,20 +26,18 @@ class UserService {
     };
 
     static findUsers = async (searchParams) => {
-
-        const user = await User.findAll({ where: searchParams });
-
-        if (!user) {
-            throw new Error('User not found');
+        const users = await User.findAll({
+            where: searchParams,
+            attributes: { exclude: ['password'] } // Exclude the 'password' field
+        });
+    
+        if (!users || users.length === 0) {
+            throw new Error('Users not found');
         }
-
-        if (user.id) {
-            return user;
-        }
-
-        throw new Error();
-
+    
+        return users;
     };
+    
 
     static checkUser = async (params) => {
         const user = await User.findOne({ where: params });
