@@ -7,14 +7,16 @@ const SupplierRoutes = require('./supplierRoutes');
 const stockRoutes = require('./inventoryRoutes');
 const userRoutes = require('./userRoutes');
 
+const verify = require('../middleware/verify');
+
 const router = express.Router();
 
 router.use('/auth', authRoutes);
-router.use('/product', productRoutes);
-router.use('/units', unitsRoutes);
-router.use('/supplier', SupplierRoutes);
-router.use('/stock', stockRoutes);
-router.use('/user', userRoutes);
+router.use('/product',verify, productRoutes);
+router.use('/units',verify, unitsRoutes);
+router.use('/supplier',verify, SupplierRoutes);
+router.use('/stock',verify, stockRoutes);
+router.use('/user',verify, userRoutes);
 
 
 module.exports = router;
