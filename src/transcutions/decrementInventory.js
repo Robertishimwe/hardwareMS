@@ -20,6 +20,7 @@ const decrementInventory = async (productId, amount, userId) => {
       // Deduct the quantity from the inventory
       const updatedQuantity = inventory.quantity - amount;
       inventory.quantity = updatedQuantity;
+      inventory.lastUpdatedBy = userId
       await inventory.save({ transaction: t });
 
       // Record the transaction in the Transaction table (negative quantity_sold for deduction)

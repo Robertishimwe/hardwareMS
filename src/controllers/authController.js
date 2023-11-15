@@ -44,11 +44,14 @@ class UserController {
             password: req.body.password,
         };
 
-        await findUser({ email: userData.email })
-        const authuser = await findUser({ email: userData.email })
-        console.log(authuser)
+        // await findUser({ email: userData.email })
+        // const authuser = await findUser({ email: userData.email })
+        // console.log(authuser)
 
         try {
+            await findUser({ email: userData.email })
+            const authuser = await findUser({ email: userData.email })
+            console.log(authuser)
             const doesPasswordMatch = await Protection.checkPassword(
                 userData.password,
                 authuser.password
@@ -69,7 +72,7 @@ class UserController {
                 res.status(400).send({ Message: 'Invalid username or password' });
             }
         } catch (error) {
-            res.status(500).send({ error });
+            res.status(500).send({ error: error.toString() });
         }
 
 

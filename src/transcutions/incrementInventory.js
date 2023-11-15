@@ -16,6 +16,7 @@ const incrementInventory = async (productId, amount, userId) => {
       // const updatedQuantity = inventory.quantity + amount;
       const updatedQuantity = parseInt(inventory.quantity) + parseInt(amount);
       inventory.quantity = updatedQuantity;
+      inventory.lastUpdatedBy = userId
       await inventory.save({ transaction: t });
 
       // Record the transaction in the Transaction table

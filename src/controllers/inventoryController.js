@@ -5,8 +5,11 @@ const { json } = require("sequelize");
 class InventoryController {
   static async increment(req, res) {
     const { productId, amount } = req.body;
+    const { id }= req.user
+
+    console.log('<<<<<<<<<id>>>>>',id)
     try {
-      const result = await incrementInventory(productId, amount, 1);
+      const result = await incrementInventory(productId, amount, id);
       return res.status(200).json({ message: "stock was added", result });
     } catch (error) {
       console.log(error);
@@ -16,8 +19,9 @@ class InventoryController {
 
   static async decrement(req, res) {
     const { productId, amount } = req.body;
+    const { id }= req.user
     try {
-      const result = await decrementInventory(productId, amount, 1);
+      const result = await decrementInventory(productId, amount, id);
       return res.status(200).json({ message: "stock was dedacted", result });
     } catch (error) {
       console.log(error);
