@@ -39,7 +39,8 @@ const decrementInventory = async (productId, amount, userId) => {
 
     console.log('Inventory decremented:', updatedInventory.toJSON());
   } catch (error) {
-    console.error('Transaction failed:', error);
+    console.log(error);
+    throw new Error(error);
   }
 };
 

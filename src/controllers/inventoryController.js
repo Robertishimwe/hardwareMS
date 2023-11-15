@@ -1,5 +1,6 @@
 const incrementInventory = require("../transcutions/incrementInventory");
 const decrementInventory = require("../transcutions/decrementInventory");
+const { json } = require("sequelize");
 
 class InventoryController {
   static async increment(req, res) {
@@ -9,6 +10,7 @@ class InventoryController {
       return res.status(200).json({ message: "stock was added", result });
     } catch (error) {
       console.log(error);
+      return res.status(500).json({ message: "action not completed successful", error: error.message });
     }
   }
 
@@ -19,6 +21,7 @@ class InventoryController {
       return res.status(200).json({ message: "stock was dedacted", result });
     } catch (error) {
       console.log(error);
+      return res.status(400).json({ message: "action not completed successful", error:error.message });
     }
   }
 }

@@ -1,11 +1,11 @@
 const UnitOfMeasurementsController = require("../controllers/unitofmeasurementsController")
-// const UserValidation = require('../validations/userValidatin')
+const unitValidation = require('../validations/unitValidation')
 // const verify = require("../middleware/authenticator")
 const express = require("express");
 
 const router = express.Router();
 
-router.post("/create", UnitOfMeasurementsController.createUnitOfMeasurement);
+router.post("/create",unitValidation.verifyUnit, UnitOfMeasurementsController.createUnitOfMeasurement);
 router.get('/getAll', UnitOfMeasurementsController.getAllUnitsOfMeasurement)
 // router.post("/login", authController.login)
 

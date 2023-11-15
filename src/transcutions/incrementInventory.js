@@ -19,7 +19,7 @@ const incrementInventory = async (productId, amount, userId) => {
       await inventory.save({ transaction: t });
 
       // Record the transaction in the Transaction table
-      const transaction = await Transaction.create(
+      await Transaction.create(
         {
           inventory_id: inventory.id,
           user_id: userId,
@@ -36,6 +36,7 @@ const incrementInventory = async (productId, amount, userId) => {
     console.log('Inventory incremented:', updatedInventory.toJSON());
   } catch (error) {
     console.error('Transaction failed:', error);
+    throw new Error(`Transaction failed: ${error}`);
   }
 };
 

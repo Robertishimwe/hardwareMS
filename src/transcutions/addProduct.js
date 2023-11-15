@@ -25,6 +25,7 @@ const addProduct = async (data, userId) => {
     console.log("New product created:", createdProduct.toJSON());
   } catch (error) {
     console.error("Transaction failed:", error);
+    throw new Error(`Transaction failed: ${error}`);
   }
 };
 
