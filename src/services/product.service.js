@@ -30,7 +30,7 @@ class ProductService {
 
       return product;
     } catch (error) {
-      throw new Error('Error finding product');
+      throw new Error(`Error finding product. ${error.message}`);
     }
   }
 
