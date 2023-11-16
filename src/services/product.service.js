@@ -38,9 +38,9 @@ class ProductService {
     try {
       const products = await Product.findAll({ where: searchParams });
 
-      if (!products || products.length === 0) {
-        throw new Error('Products not found');
-      }
+      // if (!products || products.length === 0) {
+      //   throw new Error('Products not found');
+      // }
 
       return products;
     } catch (error) {

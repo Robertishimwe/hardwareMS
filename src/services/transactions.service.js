@@ -20,9 +20,9 @@ class TransactionService {
     try {
       const transactions = await Transaction.findAll({ where: searchParams });
 
-      if (!transactions || transactions.length === 0) {
-        throw new Error("Transactions not found");
-      }
+      // if (!transactions || transactions.length === 0) {
+      //   throw new Error("Transactions not found");
+      // }
 
       return transactions;
     } catch (error) {

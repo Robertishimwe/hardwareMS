@@ -30,9 +30,9 @@ class UnitOfMeasurementsService {
   static findUnitsOfMeasurement = async (searchParams) => {
     const unitsOfMeasurement = await UnitOfMeasurements.findAll({ where: searchParams });
 
-    if (!unitsOfMeasurement || unitsOfMeasurement.length === 0) {
-      throw new Error('Units of measurement not found');
-    }
+    // if (!unitsOfMeasurement || unitsOfMeasurement.length === 0) {
+    //   throw new Error('Units of measurement not found');
+    // }
 
     return unitsOfMeasurement;
   };

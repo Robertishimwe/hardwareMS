@@ -30,9 +30,9 @@ class SupplierService {
   static findSuppliers = async (searchParams) => {
     const suppliers = await Supplier.findAll({ where: searchParams });
 
-    if (!suppliers || suppliers.length === 0) {
-      throw new Error('Suppliers not found');
-    }
+    // if (!suppliers || suppliers.length === 0) {
+    //   throw new Error('Suppliers not found');
+    // }
 
     return suppliers;
   };
