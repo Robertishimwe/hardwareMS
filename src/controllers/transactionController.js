@@ -1,4 +1,5 @@
 const TransactionService = require("../services/transactions.service");
+const ProductService = require('../services/product.service');
 
 const { findTransaction, findTransactions } = TransactionService;
 
@@ -35,6 +36,7 @@ class TransactionController {
   static async getAllByProduct(req, res) {
     const { id } = req.params;
     try {
+    await ProductService.findProduct({id:id})
       const transactions = await findTransactions({ product_id: id });
       return res
         .status(200)
