@@ -29,7 +29,7 @@ class TransactionController {
       console.log(error.message);
       return res
         .status(400)
-        .send({ message: "Error while fetching transaction", error });
+        .send({ message: "Error while fetching transaction", error:error.toString() });
     }
   }
 
