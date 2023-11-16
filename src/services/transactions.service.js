@@ -12,7 +12,7 @@ class TransactionService {
 
       return transaction;
     } catch (error) {
-      throw new Error("Error finding transaction");
+      throw new Error(error.message);
     }
   }
 
@@ -26,7 +26,7 @@ class TransactionService {
 
       return transactions;
     } catch (error) {
-      throw new Error("Error finding transactions");
+      throw new Error(error.message);
     }
   }
 
@@ -70,7 +70,7 @@ class TransactionService {
 
       return transactions;
     } catch (error) {
-      throw new Error("Error finding transactions by keyword");
+      throw new Error(error.message);
     }
   }
 
