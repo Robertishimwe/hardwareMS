@@ -11,9 +11,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Transaction.belongsTo(models.Inventory, {
-        foreignKey: 'inventoryId',
+        foreignKey: 'inventory_id',
         onDelete: 'CASCADE',
         as: 'inventory', // for descriptive queries
+      });
+
+
+      Transaction.belongsTo(models.Product, {
+        foreignKey: 'product_id',
+        onDelete: 'CASCADE',
+        as: 'product', // for descriptive queries
+      });
+
+      Transaction.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        onDelete: 'CASCADE',
+        as: 'user', // for descriptive queries
       });
       // define association here
     }
@@ -23,7 +36,8 @@ module.exports = (sequelize, DataTypes) => {
     product_id: DataTypes.INTEGER,
     inventory_id: DataTypes.INTEGER,
     quantity_sold: DataTypes.DECIMAL,
-    transaction_date: DataTypes.DATE
+    transaction_date: DataTypes.DATE,
+    transaction_type: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Transaction',

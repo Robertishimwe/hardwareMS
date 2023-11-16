@@ -9,9 +9,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      product_id: {
-        type: Sequelize.INTEGER
-      },
       product_name: {
         type: Sequelize.STRING
       },
@@ -22,10 +19,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       supplier_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'Suppliers', key: 'id' },
       },
       unit_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'UnitOfMeasurements', key: 'id' },
+        onDelete: 'cascade',
       },
       price: {
         type: Sequelize.DECIMAL

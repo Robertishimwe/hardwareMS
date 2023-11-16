@@ -14,6 +14,15 @@ class UsersController {
         }
     };
 
+    static getUser = async (req, res) => {
+        try {
+            const user = await findUser({id: req.params.id});
+            res.status(200).json(user);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    };
+
 
 }
 

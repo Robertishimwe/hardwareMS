@@ -1,19 +1,18 @@
-const { Transaction, Sequelize } = require('../database/models');
+const { Transaction, Sequelize } = require("../database/models");
 
 class TransactionService {
-  // ... existing methods
 
   static async findTransaction(searchParams) {
     try {
       const transaction = await Transaction.findOne({ where: searchParams });
 
       if (!transaction) {
-        throw new Error('Transaction not found');
+        throw new Error("Transaction not found");
       }
 
       return transaction;
     } catch (error) {
-      throw new Error('Error finding transaction');
+      throw new Error("Error finding transaction");
     }
   }
 
@@ -22,12 +21,12 @@ class TransactionService {
       const transactions = await Transaction.findAll({ where: searchParams });
 
       if (!transactions || transactions.length === 0) {
-        throw new Error('Transactions not found');
+        throw new Error("Transactions not found");
       }
 
       return transactions;
     } catch (error) {
-      throw new Error('Error finding transactions');
+      throw new Error("Error finding transactions");
     }
   }
 
@@ -37,28 +36,28 @@ class TransactionService {
         where: {
           [Sequelize.Op.or]: [
             Sequelize.where(
-              Sequelize.fn('LOWER', Sequelize.col('user_id')),
-              'LIKE',
+              Sequelize.fn("LOWER", Sequelize.col("user_id")),
+              "LIKE",
               `%${keyword.toLowerCase()}%`
             ),
             Sequelize.where(
-              Sequelize.fn('LOWER', Sequelize.col('product_id')),
-              'LIKE',
+              Sequelize.fn("LOWER", Sequelize.col("product_id")),
+              "LIKE",
               `%${keyword.toLowerCase()}%`
             ),
             Sequelize.where(
-              Sequelize.fn('LOWER', Sequelize.col('inventory_id')),
-              'LIKE',
+              Sequelize.fn("LOWER", Sequelize.col("inventory_id")),
+              "LIKE",
               `%${keyword.toLowerCase()}%`
             ),
             Sequelize.where(
-              Sequelize.fn('LOWER', Sequelize.col('quantity_sold')),
-              'LIKE',
+              Sequelize.fn("LOWER", Sequelize.col("quantity_sold")),
+              "LIKE",
               `%${keyword.toLowerCase()}%`
             ),
             Sequelize.where(
-              Sequelize.fn('LOWER', Sequelize.col('transaction_date')),
-              'LIKE',
+              Sequelize.fn("LOWER", Sequelize.col("transaction_date")),
+              "LIKE",
               `%${keyword.toLowerCase()}%`
             ),
           ],
@@ -66,16 +65,16 @@ class TransactionService {
       });
 
       if (!transactions || transactions.length === 0) {
-        throw new Error('Transactions not found for the provided keyword');
+        throw new Error("Transactions not found for the provided keyword");
       }
 
       return transactions;
     } catch (error) {
-      throw new Error('Error finding transactions by keyword');
+      throw new Error("Error finding transactions by keyword");
     }
   }
 
-  // Other product-related methods or customizations can continue here
+
 }
 
 module.exports = TransactionService;

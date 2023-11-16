@@ -16,10 +16,22 @@ module.exports = (sequelize, DataTypes) => {
         as: 'product' // for descriptive queries
       });
 
-      Inventory.hasOne(models.Transaction, {
-        foreignKey: 'inventoryId',
+      Inventory.belongsTo(models.UnitOfMeasurements, {
+        foreignKey: 'unitId',
         onDelete: 'CASCADE',
-        as: 'transaction', // for descriptive queries
+        as: 'unit' // for descriptive queries
+      });
+
+      // Inventory.hasOne(models.Transaction, {
+      //   foreignKey: 'inventoryId',
+      //   onDelete: 'CASCADE',
+      //   as: 'transaction', // for descriptive queries
+      // });
+
+      Inventory.belongsTo(models.User, {
+        foreignKey: 'lastUpdatedBy',
+        onDelete: 'CASCADE',
+        as: 'User' // for descriptive queries
       });
       // define association here
     }

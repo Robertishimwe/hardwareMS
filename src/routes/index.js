@@ -5,6 +5,7 @@ const productRoutes = require('./productRoutes');
 const unitsRoutes = require('./unitofmeasurementsRoutes');
 const SupplierRoutes = require('./supplierRoutes');
 const stockRoutes = require('./inventoryRoutes');
+const transRoutes = require('./transactionRoutes')
 const userRoutes = require('./userRoutes');
 
 const verify = require('../middleware/verify');
@@ -17,6 +18,7 @@ router.use('/units',verify, unitsRoutes);
 router.use('/supplier',verify, SupplierRoutes);
 router.use('/stock',verify, stockRoutes);
 router.use('/user',verify, userRoutes);
+router.use('/transaction',verify, transRoutes);
 
 
 module.exports = router;

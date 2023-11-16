@@ -9,20 +9,21 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      inventoryId: {
-        type: Sequelize.INTEGER
-      },
       productId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'Products', key: 'id' },
+        onDelete: 'cascade',
       },
       quantity: {
         type: Sequelize.DECIMAL
       },
       unitId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'UnitOfMeasurements', key: 'id' }
       },
       lastUpdatedBy:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: { model: 'Users', key: 'id' }
       },
       lastRestockDate: {
         type: Sequelize.DATE
