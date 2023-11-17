@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 
       Product.belongsTo(models.Category, {
         foreignKey: 'category', // Foreign key in the Product table referencing UnitOfMeasurements
-        as: 'category' // Optional alias for more descriptive queries
+        as: 'productCategory' // Optional alias for more descriptive queries
       });
 
 
