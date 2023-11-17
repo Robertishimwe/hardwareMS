@@ -28,7 +28,7 @@ class UserController {
                 role: req.body.role,
                 password: hashedPassword,
             });
-            const { password, ...dataWithoutPassword } = user
+            const { password, ...dataWithoutPassword } = user.dataValues
             return res.status(201).json({ message: "User was created successful", user: dataWithoutPassword })
         } catch (error) {
             if (error.message === 'Found') {
@@ -64,7 +64,7 @@ class UserController {
                     "xxxxxxxxHSMSxxxxxxxx",
                     '1d'
                 );
-                const { password, ...dataWithoutPassword } = authuser
+                const { password, ...dataWithoutPassword } = authuser.dataValues
                 return res.set('token', token).status(200).send({ message: "logged in successful", token: token, user: dataWithoutPassword });
             } 
             else {
