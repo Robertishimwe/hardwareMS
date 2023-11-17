@@ -16,7 +16,8 @@ module.exports = {
         type: Sequelize.TEXT
       },
       category: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        references: { model: 'Categories', key: 'id' },
       },
       supplier_id: {
         type: Sequelize.INTEGER,

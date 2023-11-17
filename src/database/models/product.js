@@ -25,6 +25,11 @@ module.exports = (sequelize, DataTypes) => {
         as: 'Supplier' // Optional alias for more descriptive queries
       });
 
+      Product.belongsTo(models.Category, {
+        foreignKey: 'category', // Foreign key in the Product table referencing UnitOfMeasurements
+        as: 'category' // Optional alias for more descriptive queries
+      });
+
 
       // Product.hasOne(models.Inventory, {
       //   foreignKey: 'productId',
@@ -37,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
   Product.init({
     product_name: DataTypes.STRING,
     description: DataTypes.TEXT,
-    category: DataTypes.STRING,
+    category: DataTypes.INTEGER,
     supplier_id: DataTypes.INTEGER,
     unit_id: DataTypes.INTEGER,
     price: DataTypes.DECIMAL
