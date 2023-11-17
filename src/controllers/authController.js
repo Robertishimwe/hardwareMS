@@ -28,8 +28,8 @@ class UserController {
                 role: req.body.role,
                 password: hashedPassword,
             });
-
-            return res.status(201).json({ message: "User was created successful", user: user })
+            const { password, ...dataWithoutPassword } = user
+            return res.status(201).json({ message: "User was created successful", user: dataWithoutPassword })
         } catch (error) {
             if (error.message === 'Found') {
                 return res.status(409).json({ error: 'user with provided email already exists' });
@@ -56,7 +56,6 @@ class UserController {
                 userData.password,
                 authuser.password
             );
-            console.log(">>>>>>>>", doesPasswordMatch)
             if (doesPasswordMatch) {
                 const tokenPackage = { id: authuser.id, role: authuser.role, email: authuser.email };
                 console.log(tokenPackage)
@@ -65,8 +64,8 @@ class UserController {
                     "xxxxxxxxHSMSxxxxxxxx",
                     '1d'
                 );
-                console.log(token)
-                return res.set('token', token).status(200).send({ message: "logged in successful", token: token });
+                const { password, ...dataWithoutPassword } = authuser
+                return res.set('token', token).status(200).send({ message: "logged in successful", token: token, user: dataWithoutPassword });
             } 
             else {
                 res.status(400).send({ Message: 'Invalid username or password' });
