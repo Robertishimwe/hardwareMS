@@ -13,12 +13,12 @@ class CategoryController {
   static createCategory = async (req, res) => {
     try {
       const check = {
-        categoryName: req.body.name,
+        name: req.body.name,
         // Add other fields you want to check for uniqueness
       };
       await checkCategory(check);
       const category = await createCategory({
-        categoryName: req.body.name,
+        name: req.body.name,
         // Add other fields from request body needed for category creation
       });
       return res
