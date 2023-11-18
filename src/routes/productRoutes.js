@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.post("/create", productValidation.verifyProduct, productController.createProduct)
 router.get('/getAll', productController.findProducts)
+router.patch('/update/:productId', productController.updateProduct)
 // router.post("/login", authController.login)
 
 module.exports = router;

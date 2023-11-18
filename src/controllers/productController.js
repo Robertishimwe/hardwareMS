@@ -14,6 +14,10 @@ class ProductController {
     }
   }
 
+  static async updateProduct(){
+    
+  }
+
   static async updateProduct(req, res) {
     try {
       const productId = req.params.productId;
