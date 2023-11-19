@@ -29,7 +29,7 @@ class InventoryController {
     }
   }
 
-  static async getAllStock(res, res){
+  static async getAllStock(req, res){
     try {
       const allStock = await InventoryService.findAllStock()
       return res.status(200).json({message:"stock fetched successful", stock: allStock})
