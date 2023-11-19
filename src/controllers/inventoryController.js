@@ -1,6 +1,6 @@
 const incrementInventory = require("../transcutions/incrementInventory");
 const decrementInventory = require("../transcutions/decrementInventory");
-const { json } = require("sequelize");
+const InventoryService = require("../services/inventory.service")
 
 class InventoryController {
   static async increment(req, res) {
@@ -27,6 +27,17 @@ class InventoryController {
       console.log(error);
       return res.status(400).json({ message: "action not completed successful", error:error.message });
     }
+  }
+
+  static async getAllStock(res, res){
+    try {
+      const allStock = await InventoryService.findAllStock()
+      return res.status(200).json({message:"stock fetched successful", stock: allStock})
+    } catch (error) {
+      return res.status(500).json({error: error.message})
+      
+    }
+
   }
 }
 

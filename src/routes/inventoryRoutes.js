@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.patch("/add",verify,stockValidation.verifyStockAddition, inventoryController.increment)
 router.patch('/dedact',verify, stockValidation.verifyStockDeduction, inventoryController.decrement)
+router.patch("/getAllStock", verify, stockValidation.verifyStockDeduction, inventoryController.getAllStock)
 // router.post("/login", authController.login)
 
 module.exports = router;
