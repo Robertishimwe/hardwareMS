@@ -1,15 +1,16 @@
 
 const { Inventory } = require('../database/models');
+const product = require('../database/models/product');
 
 class InventoryService {
 
 
   static async findAllStock(searchParams) {
     try {
-      const products = await Product.findAll({ where: searchParams });
-      return products;
+      const inventories = await Inventory.findAll({ where: searchParams, include: [{ model: product }] });
+      return inventories;
     } catch (error) {
-      throw new Error('Error getting stock');
+      throw new Error(error);
     }
   }
 
