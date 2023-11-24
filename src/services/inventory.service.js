@@ -60,7 +60,7 @@
 
 
 
-const { Inventory, Product, UnitOfMeasurements, User } = require('../database/models');
+const { Inventory, Category, Product, UnitOfMeasurements, User } = require('../database/models');
 
 class InventoryService {
   static async findAllStock(searchParams) {
@@ -98,6 +98,7 @@ class InventoryService {
               exclude: ['id','createdAt', 'updatedAt'], // Exclude unnecessary fields from UnitOfMeasurements in Inventory
             },
           },
+        
         ],
         attributes: {
             exclude: ['productId', 'unitId', 'lastUpdatedBy', 'lastRestockDate', 'createdAt', 'updatedAt'] // Exclude redundant fields from Inventory
