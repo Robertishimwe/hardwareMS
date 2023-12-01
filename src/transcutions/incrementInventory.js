@@ -26,6 +26,7 @@ const incrementInventory = async (productId, amount, userId) => {
           user_id: userId,
           product_id: productId,
           quantity_sold: amount,
+          transaction_type:'IN',
           transaction_date: new Date(),
         },
         { transaction: t }
