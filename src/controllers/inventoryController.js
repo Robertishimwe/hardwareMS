@@ -4,7 +4,8 @@ const InventoryService = require("../services/inventory.service")
 
 class InventoryController {
   static async increment(req, res) {
-    const { productId, amount } = req.body;
+    const product = req.body;
+    const { productId, amount } = product;
     const { id }= req.user
 
     console.log('<<<<<<<<<id>>>>>',id)
