@@ -17,8 +17,8 @@ const productSchema = Joi.object({
     "any.required": "{{#label}} is required",
   }),
 
-  category: Joi.string().trim().min(3).max(30).required().messages({
-    "string.base": "{{#label}} must be a string",
+  category: Joi.number().integer().positive().required().messages({
+    "number.base": "{{#label}} must be a number",
     "string.empty": "{{#label}} cannot be empty",
     "string.min": "{{#label}} should have at least {{#limit}} characters",
     "string.max": "{{#label}} should not exceed {{#limit}} characters",
