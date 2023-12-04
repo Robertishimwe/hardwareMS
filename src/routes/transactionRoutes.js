@@ -10,6 +10,6 @@ router.get("/getAll", getAall);
 router.get("/getAllForCurrentUser", getAallForCurrentUser);
 router.get("/getAllForProduct/:id", getAllByProduct);
 router.get("/getOne/:id", getOneById);
-router.get("/delete/:id", deleteTransuction)
+router.delete("/delete/:id", deleteTransuction)
 
 module.exports = router;
