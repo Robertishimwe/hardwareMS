@@ -1,54 +1,58 @@
-const { User } = require('../database/models')
+const { User } = require("../database/models");
 
 class UserService {
-    static createUser = async (data) => {
-        const user = await User.create(data, {attributes: { exclude: ['password'] }});
-        return user;
-    };
+  static createUser = async (data) => {
+    const user = await User.create(data, {
+      attributes: { exclude: ["password"] },
+    });
+    return user;
+  };
 
-    static async updateUser(user, param) {
-        const updateduser = await user.update(param);
-        return updateduser;
+  static async updateUser(user, param) {
+    const updateduser = await user.update(param);
+    return updateduser;
+  }
+
+  static findUser = async (searchParams) => {
+    const user = await User.findOne({ where: searchParams });
+
+    if (!user) {
+      throw new Error("User not found");
     }
 
-    static findUser = async (searchParams) => {
-        const user = await User.findOne({ where: searchParams });
+    if (user.id) {
+      return user;
+    }
 
-        if (!user) {
-            throw new Error('User not found');
-        }
+    throw new Error();
+  };
 
-        if (user.id) {
-            return user;
-        }
+  static findUsers = async (searchParams) => {
+    const users = await User.findAll({
+      where: searchParams,
+      attributes: { exclude: ["password"] }, // Exclude the 'password' field
+    });
 
-        throw new Error();
-    };
+    if (!users || users.length === 0) {
+      throw new Error("Users not found");
+    }
 
-    static findUsers = async (searchParams) => {
-        const users = await User.findAll({
-            where: searchParams,
-            attributes: { exclude: ['password'] } // Exclude the 'password' field
-        });
-    
-        if (!users || users.length === 0) {
-            throw new Error('Users not found');
-        }
-    
-        return users;
-    };
-    
+    return users;
+  };
 
-    static checkUser = async (params) => {
-        const user = await User.findOne({ where: params });
+  static checkUser = async (params) => {
+    const user = await User.findOne({ where: params });
 
-        if (user) {
-            throw new Error('Found');
-        }
-        return user;
-    };
+    if (user) {
+      throw new Error("Found");
+    }
+    return user;
+  };
 
-
+  static async deleteUser(user) {
+    const deletedUser = await user.destroy();
+    return deletedUser;
+  }
 }
 
 module.exports = UserService;

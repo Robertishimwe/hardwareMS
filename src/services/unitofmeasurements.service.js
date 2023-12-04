@@ -1,5 +1,5 @@
 // Import necessary modules
-const { UnitOfMeasurements } = require('../database/models');
+const { UnitOfMeasurements } = require("../database/models");
 
 // Create UnitOfMeasurementsService class
 class UnitOfMeasurementsService {
@@ -17,10 +17,12 @@ class UnitOfMeasurementsService {
 
   // Find a single unit of measurement by search parameters
   static findUnitOfMeasurement = async (searchParams) => {
-    const unitOfMeasurement = await UnitOfMeasurements.findOne({ where: searchParams });
+    const unitOfMeasurement = await UnitOfMeasurements.findOne({
+      where: searchParams,
+    });
 
     if (!unitOfMeasurement) {
-      throw new Error('Unit of measurement not found');
+      throw new Error("Unit of measurement not found");
     }
 
     return unitOfMeasurement;
@@ -28,7 +30,9 @@ class UnitOfMeasurementsService {
 
   // Find multiple units of measurement by search parameters
   static findUnitsOfMeasurement = async (searchParams) => {
-    const unitsOfMeasurement = await UnitOfMeasurements.findAll({ where: searchParams });
+    const unitsOfMeasurement = await UnitOfMeasurements.findAll({
+      where: searchParams,
+    });
 
     // if (!unitsOfMeasurement || unitsOfMeasurement.length === 0) {
     //   throw new Error('Units of measurement not found');
@@ -39,14 +43,28 @@ class UnitOfMeasurementsService {
 
   // Check if a unit of measurement exists based on parameters
   static checkUnitOfMeasurement = async (params) => {
-    const unitOfMeasurement = await UnitOfMeasurements.findOne({ where: params });
+    const unitOfMeasurement = await UnitOfMeasurements.findOne({
+      where: params,
+    });
 
     if (unitOfMeasurement) {
-      throw new Error('Unit of measurement found');
+      throw new Error("Unit of measurement found");
     }
 
     return unitOfMeasurement;
   };
+
+  static async deleteUnitOfMeasurement(searchParams) {
+    const unitOfMeasurement = await UnitOfMeasurements.findOne({
+      where: searchParams,
+    });
+
+    if (!unitOfMeasurement) {
+      throw new Error("Unit of measurement not found");
+    }
+
+    await unitOfMeasurement.destroy();
+  }
 }
 
 // Export the UnitOfMeasurementsService

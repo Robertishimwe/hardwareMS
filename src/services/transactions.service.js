@@ -1,7 +1,6 @@
 const { Transaction, Sequelize } = require("../database/models");
 
 class TransactionService {
-
   static async findTransaction(searchParams) {
     try {
       const transaction = await Transaction.findOne({ where: searchParams });
@@ -74,7 +73,21 @@ class TransactionService {
     }
   }
 
-
+  static async deleteTransaction(searchParams) {
+    try {
+      const transaction = await Transaction.findOne({ where: searchParams });
+  
+      if (!transaction) {
+        throw new Error("Transaction not found");
+      }
+  
+      await transaction.destroy();
+  
+      return { message: "Transaction deleted successfully" };
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 }
 
 module.exports = TransactionService;

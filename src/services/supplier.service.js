@@ -1,5 +1,5 @@
 // Import necessary modules
-const { Supplier } = require('../database/models');
+const { Supplier } = require("../database/models");
 
 // Create SupplierService class
 class SupplierService {
@@ -20,7 +20,7 @@ class SupplierService {
     const supplier = await Supplier.findOne({ where: searchParams });
 
     if (!supplier) {
-      throw new Error('Supplier not found');
+      throw new Error("Supplier not found");
     }
 
     return supplier;
@@ -42,11 +42,22 @@ class SupplierService {
     const supplier = await Supplier.findOne({ where: params });
 
     if (supplier) {
-      throw new Error('Supplier found');
+      throw new Error("Supplier found");
     }
 
     return supplier;
   };
+
+  // Delete an existing supplier
+  static async deleteSupplier(supplier) {
+    const deletedSupplier = await supplier.destroy();
+
+    if (!deletedSupplier) {
+      throw new Error("Failed to delete supplier");
+    }
+
+    return deletedSupplier;
+  }
 }
 
 // Export the SupplierService

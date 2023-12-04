@@ -1,8 +1,6 @@
-
 // const { Inventory } = require('../database/models');
 
 // class InventoryService {
-
 
 //   static async findAllStock(searchParams) {
 //     try {
@@ -16,8 +14,6 @@
 // }
 
 // module.exports = InventoryService;
-
-
 
 // const { Inventory, Product, UnitOfMeasurements, User } = require('../database/models'); // Import the necessary models
 
@@ -57,10 +53,13 @@
 
 // module.exports = InventoryService;
 
-
-
-
-const { Inventory, Category, Product, UnitOfMeasurements, User } = require('../database/models');
+const {
+  Inventory,
+  Category,
+  Product,
+  UnitOfMeasurements,
+  User,
+} = require("../database/models");
 
 class InventoryService {
   static async findAllStock(searchParams) {
@@ -70,9 +69,15 @@ class InventoryService {
         include: [
           {
             model: Product,
-            as: 'product',
+            as: "product",
             attributes: {
-              exclude: ['id', 'unit_id', 'createdAt', 'updatedAt', 'supplier_id'], // Exclude unnecessary fields from Product
+              exclude: [
+                "id",
+                "unit_id",
+                "createdAt",
+                "updatedAt",
+                "supplier_id",
+              ], // Exclude unnecessary fields from Product
             },
             // include: [
             //   {
@@ -86,22 +91,35 @@ class InventoryService {
           },
           {
             model: User,
-            as: 'User',
+            as: "User",
             attributes: {
-              exclude: ['password', 'createdAt', 'updatedAt','phone', 'role', 'id'], // Exclude sensitive fields from User
+              exclude: [
+                "password",
+                "createdAt",
+                "updatedAt",
+                "phone",
+                "role",
+                "id",
+              ], // Exclude sensitive fields from User
             },
           },
           {
             model: UnitOfMeasurements,
-            as: 'unit',
+            as: "unit",
             attributes: {
-              exclude: ['id','createdAt', 'updatedAt'], // Exclude unnecessary fields from UnitOfMeasurements in Inventory
+              exclude: ["id", "createdAt", "updatedAt"], // Exclude unnecessary fields from UnitOfMeasurements in Inventory
             },
           },
-        
         ],
         attributes: {
-            exclude: ['productId', 'unitId', 'lastUpdatedBy', 'lastRestockDate', 'createdAt', 'updatedAt'] // Exclude redundant fields from Inventory
+          exclude: [
+            "productId",
+            "unitId",
+            "lastUpdatedBy",
+            "lastRestockDate",
+            "createdAt",
+            "updatedAt",
+          ], // Exclude redundant fields from Inventory
         },
       });
       return inventories;
@@ -109,7 +127,19 @@ class InventoryService {
       throw new Error(error);
     }
   }
+
+  static async deleteInventory(id) {
+    try {
+      const inventory = await Inventory.findOne({ where: { id } });
+      if (!inventory) {
+        throw new Error("Inventory not found");
+      }
+      await inventory.destroy();
+      return { message: "Inventory deleted successfully" };
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 
 module.exports = InventoryService;
-
