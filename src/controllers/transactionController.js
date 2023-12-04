@@ -1,7 +1,7 @@
 const TransactionService = require("../services/transactions.service");
 const ProductService = require('../services/product.service');
 
-const { findTransaction, findTransactions } = TransactionService;
+const { findTransaction, findTransactions, deleteTransaction } = TransactionService;
 
 class TransactionController {
   static async getAall(req, res) {
@@ -62,6 +62,17 @@ class TransactionController {
         .status(400)
         .send({ message: "Error while fetching transaction", error });
     }
+  }
+
+  static async deleteTransuction(req,res){
+    const { id } = req.params;
+    try {
+      const deletedTransaction = await deleteTransaction({id:id})
+      return res.status(204).send({message: "deleted successful", detail: deletedTransaction})
+    } catch (error) {
+      res.status(500).send({error: error.message})
+    }
+
   }
 }
 
