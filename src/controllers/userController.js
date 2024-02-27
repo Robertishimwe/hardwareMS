@@ -33,6 +33,12 @@ class UsersController {
                 delete updateData.password;
             }
 
+            if (updateData.hasOwnProperty('role')) {
+                delete updateData.role;
+
+                return res.status(401).json({message:"You are not allowed to change your Role"});
+            }
+
             const updatedUser = await updateUser(userId, updateData);
             res.status(200).json(updatedUser);
         } catch (error) {
