@@ -8,9 +8,13 @@ class UserService {
     return user;
   };
 
-  static async updateUser(user, param) {
-    const updateduser = await user.update(param);
-    return updateduser;
+  static async updateUser(userId, param) {
+    const user = await User.findByPk(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    const updatedUser = await user.update(param);
+    return updatedUser;
   }
 
   static findUser = async (searchParams) => {

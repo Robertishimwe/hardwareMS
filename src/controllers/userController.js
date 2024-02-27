@@ -1,6 +1,6 @@
 const UserService = require('../services/user.service')
 
-const { findUsers, findUser } = UserService;
+const { findUsers, findUser, updateUser } = UserService;
 
 class UsersController {
 
@@ -16,8 +16,25 @@ class UsersController {
 
     static getUser = async (req, res) => {
         try {
-            const user = await findUser({id: req.params.id});
+            const user = await findUser({ id: req.params.id });
             res.status(200).json(user);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    };
+
+    static updateUserProfile = async (req, res) => {
+        try {
+            const userId = req.params.id;
+            const updateData = req.body;
+
+            // Remove the password field from updateData if it exists
+            if (updateData.hasOwnProperty('password')) {
+                delete updateData.password;
+            }
+
+            const updatedUser = await updateUser(userId, updateData);
+            res.status(200).json(updatedUser);
         } catch (error) {
             res.status(400).json({ message: error.message });
         }
