@@ -1,4 +1,4 @@
-const { Product, Category, Supplier, UnitOfMeasurements, } = require("../database/models");
+const { Product, Category, Supplier, UnitOfMeasurements } = require("../database/models");
 
 class ProductService {
   static async createProduct(data) {
