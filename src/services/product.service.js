@@ -38,7 +38,7 @@ class ProductService {
       const products = await Product.findAll({
         where: searchParams,
         include: [
-          { model: Category, as: 'category' },
+          { model: Category, as: 'productCategory' },
           { model: Supplier, as: 'supplier' },
           { model: UnitOfMeasurements, as: 'unitOfMeasurement' },
         ],
