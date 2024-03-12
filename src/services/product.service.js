@@ -35,12 +35,15 @@ class ProductService {
 
   static async findProducts(searchParams) {
     try {
-      const products = await Product.findAll({ where: searchParams });
-
-      // if (!products || products.length === 0) {
-      //   throw new Error('Products not found');
-      // }
-
+      const products = await Product.findAll({
+        where: searchParams,
+        include: [
+          { model: Category, as: 'category' },
+          { model: Supplier, as: 'supplier' },
+          { model: UnitOfMeasurements, as: 'unitOfMeasurement' },
+        ],
+      });
+  
       return products;
     } catch (error) {
       throw new Error("Error finding products");
