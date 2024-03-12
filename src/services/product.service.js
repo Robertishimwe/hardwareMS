@@ -39,7 +39,7 @@ class ProductService {
         where: searchParams,
         include: [
           { model: Category, as: 'productCategory' },
-          { model: Supplier, as: 'supplier' },
+          { model: Supplier, as: 'Supplier' },
           { model: UnitOfMeasurements, as: 'unitOfMeasurement' },
         ],
       });
