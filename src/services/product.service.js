@@ -46,7 +46,7 @@ class ProductService {
   
       return products;
     } catch (error) {
-      throw new Error("Error finding products");
+      throw new Error("Error finding products", error);
     }
   }
 
