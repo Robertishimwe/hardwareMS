@@ -40,7 +40,7 @@ class ProductService {
         include: [
           { model: Category, as: 'productCategory' },
           { model: Supplier, as: 'Supplier' },
-          { model: UnitOfMeasurements, as: 'unitOfMeasurement' },
+          { model: UnitOfMeasurements, as: 'unit' },
         ],
       });
   
