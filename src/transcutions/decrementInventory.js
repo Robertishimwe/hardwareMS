@@ -76,7 +76,7 @@ const decrementInventory = async (transactions, userId) => {
         // Ensure there's enough quantity to deduct
         if (inventory.quantity < amount) {
           const product = await ProductService.findProduct({ id: productId });
-          throw new Error(`Insufficient quantity in inventory for product < ${product.product_name} >`);
+          throw new Error(`Insufficient quantity in inventory for product < ${product.product_name} >. The remaining quantity is ${inventory.quantity}`);
         }
 
         // Deduct the quantity from the inventory
