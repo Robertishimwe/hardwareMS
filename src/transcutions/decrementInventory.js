@@ -1,4 +1,6 @@
 const { sequelize, Inventory, Transaction } = require("../database/models");
+const ProductService = require("../services/product.service");
+
 
 // const decrementInventory = async (productId, amount, userId) => {
 //   try {
@@ -67,12 +69,14 @@ const decrementInventory = async (transactions, userId) => {
         });
 
         if (!inventory) {
-          throw new Error(`Inventory not found for the product with id ${productId}`);
+          const product = await ProductService.findProduct({ id: productId });
+          throw new Error(`Inventory not found for the product " ${product.product_name} "`);
         }
 
         // Ensure there's enough quantity to deduct
         if (inventory.quantity < amount) {
-          throw new Error(`Insufficient quantity in inventory for product with id ${productId}`);
+          const product = await ProductService.findProduct({ id: productId });
+          throw new Error(`Insufficient quantity in inventory for product ${product.product_name}`);
         }
 
         // Deduct the quantity from the inventory

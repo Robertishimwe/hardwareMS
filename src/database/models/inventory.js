@@ -40,6 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     productId: DataTypes.INTEGER,
     quantity: DataTypes.DECIMAL,
     unitId: DataTypes.INTEGER,
+    minimumStockLevel: DataTypes.DECIMAL,
     lastUpdatedBy: DataTypes.INTEGER,
     lastRestockDate: DataTypes.DATE
   }, {
