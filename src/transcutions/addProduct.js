@@ -12,6 +12,7 @@ const addProduct = async (data, userId) => {
         {
           productId: product.id,
           quantity: 0,
+          minimumStockLevel: 10,
           unitId: product.unit_id,
           lastUpdatedBy: 1, // Replace with actual user ID
           lastRestockDate: new Date(),
