@@ -2,7 +2,7 @@
   "development": {
     "username": "avnadmin",
     "password": "AVNS_EfUj-VLFHelXr_GugKm",
-    "database": "defaultdb",
+    "database": "preproduction",
     "host": "test-robertishimwe0-5cb2.a.aivencloud.com",
     "port":26939,
     "dialect": "mysql"
