@@ -1,7 +1,7 @@
 const Joi = require("joi");
 
 const productSchema = Joi.object({
-  product_name: Joi.string().trim().min(3).max(50).required().messages({
+  product_name: Joi.required().string().trim().min(3).max(50).messages({
     "string.base": "{{#label}} must be a string",
     "string.empty": "{{#label}} cannot be empty",
     "string.min": "{{#label}} should have at least {{#limit}} characters",
@@ -9,7 +9,7 @@ const productSchema = Joi.object({
     "any.required": "{{#label}} is required",
   }),
 
-  description: Joi.string().trim().min(10).max(200).required().messages({
+  description: Joi.required().string().trim().min(10).max(200).messages({
     "string.empty": "{{#label}} cannot be empty",
     "string.base": "{{#label}} must be a string",
     "string.min": "{{#label}} should have at least {{#limit}} characters",
@@ -17,7 +17,7 @@ const productSchema = Joi.object({
     "any.required": "{{#label}} is required",
   }),
 
-  category: Joi.number().integer().positive().required().messages({
+  category: Joi.required().number().integer().positive().messages({
     "string.empty": "{{#label}} cannot be empty",
     "number.base": "{{#label}} must be a number",
     "string.min": "{{#label}} should have at least {{#limit}} characters",
@@ -25,21 +25,22 @@ const productSchema = Joi.object({
     "any.required": "{{#label}} is required",
   }),
 
-  supplier_id: Joi.number().integer().positive().required().messages({
+  supplier_id: Joi.required().number().integer().positive().messages({
     "any.required": "{{#label}} is required",
     "number.base": "{{#label}} must be a number",
     "number.integer": "{{#label}} must be an integer",
     "number.positive": "{{#label}} must be a positive number",
   }),
 
-  unit_id: Joi.number().integer().positive().required().messages({
+  unit_id: Joi.required().number().integer().positive().messages({
+
     "any.required": "{{#label}} is required",
     "number.base": "{{#label}} must be a number",
     "number.integer": "{{#label}} must be an integer",
     "number.positive": "{{#label}} must be a positive number",
   }),
 
-  price: Joi.number().positive().precision(2).required().messages({
+  price: Joi.required().number().positive().precision(2).messages({
     "any.required": "{{#label}} is required",
     "number.base": "{{#label}} must be a number",
     "number.positive": "{{#label}} must be a positive number",
