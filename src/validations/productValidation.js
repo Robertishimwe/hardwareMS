@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const productSchema = Joi.object({
+const productSchema = Joi.object.keys({
   product_name: Joi.string().trim().min(3).max(50).required().messages({
     "string.base": "{{#label}} must be a string",
     "string.empty": "{{#label}} cannot be empty",
