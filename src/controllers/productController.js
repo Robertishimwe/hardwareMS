@@ -15,7 +15,7 @@ class ProductController {
         .json({ message: "Product created successfully", product });
     } catch (error) {
       res
-        .status(500)
+        .status(400)
         .json({ error: "Error creating product", details: error.message });
     }
   }
