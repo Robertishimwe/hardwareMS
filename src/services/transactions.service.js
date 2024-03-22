@@ -1,4 +1,4 @@
-const { Transaction, Sequelize } = require("../database/models");
+const { Transaction, User, Product, Sequelize } = require("../database/models");
 
 class TransactionService {
   static async findTransaction(searchParams) {
@@ -17,7 +17,31 @@ class TransactionService {
 
   static async findTransactions(searchParams) {
     try {
-      const transactions = await Transaction.findAll({ where: searchParams });
+      const transactions = await Transaction.findAll({ where: searchParams, include: [
+        { model: Product, as: 'product',
+        attributes: {
+          exclude: [
+            "id",
+            "unit_id",
+            "createdAt",
+            "updatedAt",
+            "supplier_id",
+          ], // Exclude unnecessary fields from Product
+        }, },
+
+        { model: User, as: 'User',
+        attributes: {
+          exclude: [
+            "password",
+            "createdAt",
+            "updatedAt",
+            "phone",
+            "role",
+            "id",
+          ], // Exclude sensitive fields from User
+        }, },
+        { model: UnitOfMeasurements, as: 'unit' },
+      ], });
 
       // if (!transactions || transactions.length === 0) {
       //   throw new Error("Transactions not found");
