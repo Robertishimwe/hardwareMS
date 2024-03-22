@@ -40,7 +40,6 @@ class TransactionService {
             "id",
           ], // Exclude sensitive fields from User
         }, },
-        { model: UnitOfMeasurements, as: 'unit' },
       ], });
 
       // if (!transactions || transactions.length === 0) {
