@@ -29,7 +29,7 @@ class TransactionService {
           ], // Exclude unnecessary fields from Product
         }, },
 
-        { model: User, as: 'User',
+        { model: User, as: 'user',
         attributes: {
           exclude: [
             "password",
