@@ -29,7 +29,7 @@ class UsersController {
             const updateData = req.body;
 
             // Remove the password field from updateData if it exists
-            if (updateData.hasOwnProperty('password')) {
+            if (updateData.hasOwnProperty('passwordq')) {
                 delete updateData.password;
             }
 
