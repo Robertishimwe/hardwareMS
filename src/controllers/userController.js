@@ -29,11 +29,11 @@ class UsersController {
             const updateData = req.body;
 
             // Remove the password field from updateData if it exists
-            if (updateData.hasOwnProperty('passwordq')) {
+            if (updateData.hasOwnProperty('password')) {
                 delete updateData.password;
             }
 
-            if (updateData.hasOwnProperty('role')) {
+            if (updateData.hasOwnProperty('roles')) {
                 delete updateData.role;
 
                 return res.status(401).json({message:"You are not allowed to change your Role"});
