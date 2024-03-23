@@ -27,24 +27,40 @@ class UsersController {
         try {
             const userId = req.params.id;
             const updateData = req.body;
-
-            // Remove the password field from updateData if it exists
-            if (updateData.hasOwnProperty('password')) {
+            const { id, role } = req.user;
+    
+            // Only the owner of the profile or an admin can edit the profile
+            if (role !== 'admin' && id !== userId) {
+                return res.status(403).json({ message: 'You are not authorized to edit this profile' });
+            }
+    
+            // Only the owner of the profile or an admin can modify the password
+            if (updateData.hasOwnProperty('password') && role !== 'admin' && id !== userId) {
+                return res.status(403).json({ message: 'You are not authorized to modify the password' });
+            }
+    
+            // Only an admin can modify the role
+            if (updateData.hasOwnProperty('role') && role !== 'admin') {
+                return res.status(403).json({ message: 'You are not authorized to modify the role' });
+            }
+    
+            // Remove the password field from updateData if it exists and the user is not authorized to modify it
+            if (updateData.hasOwnProperty('password') && role !== 'admin' && id !== userId) {
                 delete updateData.password;
             }
-
-            if (updateData.hasOwnProperty('roles')) {
+    
+            // Remove the role field from updateData if it exists and the user is not authorized to modify it
+            if (updateData.hasOwnProperty('role') && role !== 'admin') {
                 delete updateData.role;
-
-                return res.status(401).json({message:"You are not allowed to change your Role"});
             }
-
+    
             const updatedUser = await updateUser(userId, updateData);
             res.status(200).json(updatedUser);
         } catch (error) {
             res.status(400).json({ message: error.message });
         }
     };
+    
 
 
 }
