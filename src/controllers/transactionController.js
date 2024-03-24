@@ -55,7 +55,7 @@ class TransactionController {
       const transaction = await findTransactions({user_id:id});
       return res
         .status(200)
-        .send({ message: "transaction fetched successful", transaction });
+        .send({ message: "transaction fetched successful", transactions });
     } catch (error) {
       console.log(error);
       return res
