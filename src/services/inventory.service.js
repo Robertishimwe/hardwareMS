@@ -115,10 +115,7 @@ class InventoryService {
           exclude: [
             "productId",
             "unitId",
-            "lastUpdatedBy",
-            "lastRestockDate",
             "createdAt",
-            "updatedAt",
           ], // Exclude redundant fields from Inventory
         },
       });
