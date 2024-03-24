@@ -52,7 +52,7 @@ class TransactionController {
   static async getAallForCurrentUser(req, res) {
     const { id } = req.user;
     try {
-      const transaction = await findTransactions({user_id:id});
+      const transactions = await findTransactions({user_id:id});
       return res
         .status(200)
         .send({ message: "transaction fetched successful", transactions });
