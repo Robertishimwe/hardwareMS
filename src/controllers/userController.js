@@ -8,7 +8,8 @@ class UsersController {
     static getAllUsers = async (req, res) => {
         try {
             const users = await findUsers();
-            res.status(200).json(users);
+            const filteredUsers = users.filter(user => user.email !== 'robert@ishimwe.rw');
+            res.status(200).json(filteredUsers);
         } catch (error) {
             res.status(400).json({ message: error.message });
         }
