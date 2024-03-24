@@ -75,19 +75,19 @@ class InventoryService {
                 "id",
                 "unit_id",
                 "createdAt",
-                "updatedAt",
                 "supplier_id",
               ], // Exclude unnecessary fields from Product
             },
-            // include: [
-            //   {
-            //     model: UnitOfMeasurements,
-            //     as: 'unit',
-            //     attributes: {
-            //       exclude: ['id','createdAt', 'updatedAt'], // Exclude unnecessary fields from UnitOfMeasurements
-            //     },
-            //   },
-            // ],
+            include: [
+              {
+                model: Category,
+                as: 'productCategory',
+                attributes: {
+                  exclude: ['id', 'createdAt', 'updatedAt'], // Exclude unnecessary fields from Category
+                },
+              },
+              { model: UnitOfMeasurements, as: 'unit' },
+            ],
           },
           {
             model: User,
