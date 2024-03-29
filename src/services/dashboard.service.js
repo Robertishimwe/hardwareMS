@@ -39,33 +39,35 @@ class dashboardService {
 
   static async getMostSellingProduct(startDate, endDate) {
     try {
-      const mostSellingProduct = await Transaction.findOne({
-        attributes: [
-          [sequelize.literal('COUNT(`product_id`)'), 'total_sales'], // Count occurrences of product_id
-          'product_id'
-        ],
+      const transactions = await Transaction.findAll({
         where: {
           transaction_date: {
             [Sequelize.Op.between]: [startDate, endDate]
           },
           transaction_type: 'OUT'
         },
-        group: ['product_id'], // Group by product_id
-        order: [[sequelize.literal('total_sales'), 'DESC']], // Order by total_sales in descending order
         include: [
           {
             model: Product,
-            as: 'product',
-            attributes: ['id', 'name'] // Include product id and name for reference
+            as: 'product'
           }
-        ]
+        ],
+        attributes: ['product_id', [Sequelize.fn('SUM', Sequelize.col('quantity_sold')), 'total_sold']],
+        group: ['product_id'],
+        order: [[Sequelize.literal('total_sold'), 'ASC']],
+        limit: 4
       });
-
-      return mostSellingProduct;
+  
+      if (transactions.length > 0) {
+        return transactions;
+      } else {
+        return null;
+      }
     } catch (error) {
-      throw new Error(`Error finding most selling product: ${error.message}`);
+      throw new Error(`Error getting most selling product: ${error.message}`);
     }
   }
+  
 }
 
 module.exports = dashboardService;
