@@ -6,7 +6,8 @@ const unitsRoutes = require('./unitofmeasurementsRoutes');
 const SupplierRoutes = require('./supplierRoutes');
 const categoryRoutes = require('./categoryRoutes')
 const stockRoutes = require('./inventoryRoutes');
-const transRoutes = require('./transactionRoutes')
+const transRoutes = require('./transactionRoutes');
+const dashboardRoutes = require('./dashboardRoute');
 const userRoutes = require('./userRoutes');
 
 const verify = require('../middleware/verify');
@@ -21,7 +22,7 @@ router.use('/stock',verify, stockRoutes);
 router.use('/user',verify, userRoutes);
 router.use('/transaction',verify, transRoutes);
 router.use('/category',verify, categoryRoutes);
-router.use('/dashboard', categoryRoutes);
+router.use('/dashboard', dashboardRoutes);
 
 
 module.exports = router;
