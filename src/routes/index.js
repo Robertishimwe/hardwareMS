@@ -21,6 +21,7 @@ router.use('/stock',verify, stockRoutes);
 router.use('/user',verify, userRoutes);
 router.use('/transaction',verify, transRoutes);
 router.use('/category',verify, categoryRoutes);
+router.use('/dashboard', categoryRoutes);
 
 
 module.exports = router;
