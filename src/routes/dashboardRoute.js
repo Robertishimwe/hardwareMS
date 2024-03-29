@@ -10,5 +10,6 @@ const express = require("express");
 const router = express.Router();
 
 router.get('/', DashboardController.getTotalSallesController);
+router.get('/mostSellingProduct', DashboardController.getMostSellingProductController)
 
 module.exports = router;
