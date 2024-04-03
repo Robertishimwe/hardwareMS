@@ -69,15 +69,27 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: process.env.MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: process.env.MYSQL_DATABASE
-      MYSQL_USER: process.env.MYSQL_USER
-      MYSQL_PASSWORD: MYSQL_PASSWORD
+      MYSQL_ROOT_PASSWORD: Password@123
+      MYSQL_DATABASE: production
+      MYSQL_USER: ishimwe
+      MYSQL_PASSWORD: Password@123
     ports:
       - 3306:3306
     volumes:
       - db-data:/var/lib/mysql
-
+ 
+  # Sequelize CLI service
+  sequelize-cli:
+   build:
+    context: .
+   environment:
+    NODE_ENV: production
+   command: npx sequelize-cli db:migrate
+   depends_on:
+    - db
+   working_dir: /usr/src/app
+   volumes:
+    - .:/usr/src/app
 # Define volumes
 volumes:
   db-data:

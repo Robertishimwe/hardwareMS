@@ -1,5 +1,6 @@
 const express = require('express');
 const cluster = require('cluster');
+const os = require('os');
 const numCPUs = require('os').cpus().length;
 const cors = require('cors');
 const routes = require('./routes');
@@ -7,6 +8,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 
 const app = express();
+const hostname = os.hostname();
 
 const db = require('./config/dbase');
 const createAdminUser = require('./config/createAdmin');
@@ -23,7 +25,7 @@ app.use(compression());
 app.use(express.json());
 app.use('/api', routes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -43,7 +45,7 @@ if (cluster.isMaster) {
       console.log('Database synced');
       createAdminUser();
       app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT} in worker ${process.pid}`);
+        console.log(`Server is running on port ${hostname}/${PORT} in worker ${process.pid}`);
       });
     })
     .catch((err) => {

@@ -2,9 +2,9 @@
   "development": {
     "username": "avnadmin",
     "password": "AVNS_EfUj-VLFHelXr_GugKm",
-    "database": "preproduction",
+    "database": "defaultdb",
     "host": "test-robertishimwe0-5cb2.a.aivencloud.com",
-    "port":26939,
+    "port": 26939,
     "dialect": "mysql"
   },
   "test": {
@@ -15,11 +15,11 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "avnadmin",
-    "password": "AVNS_EfUj-VLFHelXr_GugKm",
-    "database": "preproduction",
-    "host": "test-robertishimwe0-5cb2.a.aivencloud.com",
-    "port":26939,
+    "username": "ishimwe",
+    "password": "Password@123",
+    "database": "production",
+    "host": "db",
+    "port": 3306,
     "dialect": "mysql"
   }
 }

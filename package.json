@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "npm run migrate && node src/index.js",
     "addUser": "npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string,phone:integer,role:string",
     "migrate": "npx sequelize-cli db:migrate",
     "down": "npx sequelize-cli db:migrate:undo"
