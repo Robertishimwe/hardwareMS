@@ -51,7 +51,7 @@ if (process.env.NODE_ENV === 'production') {
     },
   });
 } else {
-  sequelize = new Sequelize('defaultdb', 'avnadmin', 'AVNS_EfUj-VLFHelXr_GugKm', {
+  sequelize = new Sequelize('development', 'avnadmin', 'AVNS_EfUj-VLFHelXr_GugKm', {
     host: 'test-robertishimwe0-5cb2.a.aivencloud.com',
     port: 26939,
     dialect:'mysql',
