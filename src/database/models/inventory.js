@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       });
 
       Inventory.belongsTo(models.Supplier, {
-        foreignKey: 'supplierId',
+        foreignKey: 'supplier_id',
         onDelete: 'CASCADE',
         as: 'Supplier' // for descriptive queries
       });
@@ -44,9 +44,9 @@ module.exports = (sequelize, DataTypes) => {
     minimumStockLevel: DataTypes.DECIMAL,
     lastUpdatedBy: DataTypes.INTEGER,
     lastRestockDate: DataTypes.DATE,
-    buyingPrice: DataTypes.DECIMAL, // add the new buying price field
-    sellingPrice: DataTypes.DECIMAL, // add the new selling price field
-    supplierId: DataTypes.INTEGER, // add the new supplier ID field
+    buying_price: DataTypes.DECIMAL, // add the new buying price field
+    selling_price: DataTypes.DECIMAL, // add the new selling price field
+    supplier_id: DataTypes.INTEGER, // add the new supplier ID field
   }, {
     sequelize,
     modelName: 'Inventory',
