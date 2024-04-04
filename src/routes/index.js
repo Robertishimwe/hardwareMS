@@ -15,7 +15,8 @@ const verify = require('../middleware/verify');
 const router = express.Router();
 
 router.use('/auth', authRoutes);
-router.use('/product',verify, productRoutes);
+// router.use('/product',verify, productRoutes);
+router.use('/product', productRoutes);
 router.use('/units',verify, unitsRoutes);
 router.use('/supplier',verify, SupplierRoutes);
 router.use('/stock',verify, stockRoutes);
