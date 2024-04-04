@@ -115,6 +115,8 @@
 const { Product, sequelize, Inventory } = require("../database/models");
 
 const addProduct = async (data, userId) => {
+
+  console.log("===========================data====================",data.buying_price)
   try {
     // Start a transaction
     const createdProduct = await sequelize.transaction(async (t) => {
@@ -127,7 +129,6 @@ const addProduct = async (data, userId) => {
       }, { transaction: t });
 
       // Create the corresponding Inventory entry within the same transaction
-      console.log(data.buying_price)
       await Inventory.create(
         {
           productId: product.id,
