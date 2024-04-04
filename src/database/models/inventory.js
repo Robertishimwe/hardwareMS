@@ -22,17 +22,18 @@ module.exports = (sequelize, DataTypes) => {
         as: 'unit' // for descriptive queries
       });
 
-      // Inventory.hasOne(models.Transaction, {
-      //   foreignKey: 'inventoryId',
-      //   onDelete: 'CASCADE',
-      //   as: 'transaction', // for descriptive queries
-      // });
+      Inventory.belongsTo(models.Supplier, {
+        foreignKey: 'supplierId',
+        onDelete: 'CASCADE',
+        as: 'Supplier' // for descriptive queries
+      });
 
       Inventory.belongsTo(models.User, {
         foreignKey: 'lastUpdatedBy',
         onDelete: 'CASCADE',
         as: 'User' // for descriptive queries
       });
+
       // define association here
     }
   }
@@ -42,7 +43,10 @@ module.exports = (sequelize, DataTypes) => {
     unitId: DataTypes.INTEGER,
     minimumStockLevel: DataTypes.DECIMAL,
     lastUpdatedBy: DataTypes.INTEGER,
-    lastRestockDate: DataTypes.DATE
+    lastRestockDate: DataTypes.DATE,
+    buyingPrice: DataTypes.DECIMAL, // add the new buying price field
+    sellingPrice: DataTypes.DECIMAL, // add the new selling price field
+    supplierId: DataTypes.INTEGER, // add the new supplier ID field
   }, {
     sequelize,
     modelName: 'Inventory',

@@ -18,13 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         as: 'unit' // Optional alias for more descriptive queries
       });
 
-
-      Product.belongsTo(models.Supplier, {
-        foreignKey: 'supplier_id', // Foreign key in the Product table referencing UnitOfMeasurements
-        onDelete: 'CASCADE',
-        as: 'Supplier' // Optional alias for more descriptive queries
-      });
-
       Product.belongsTo(models.Category, {
         foreignKey: 'category', // Foreign key in the Product table referencing UnitOfMeasurements
         as: 'productCategory' // Optional alias for more descriptive queries
@@ -43,9 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     product_name: DataTypes.STRING,
     description: DataTypes.TEXT,
     category: DataTypes.INTEGER,
-    supplier_id: DataTypes.INTEGER,
     unit_id: DataTypes.INTEGER,
-    price: DataTypes.DECIMAL
   }, {
     sequelize,
     modelName: 'Product',

@@ -9,7 +9,7 @@ class ProductController {
       await ProductService.checkProduct({
         product_name: productData.product_name,
       });
-      const product = await addProduct(productData, 1);
+      const product = await addProduct(productData, req.user.id); // Use the user ID from the request object
       res
         .status(201)
         .json({ message: "Product created successfully", product });
@@ -19,8 +19,6 @@ class ProductController {
         .json({ error: "Error creating product", details: error.message });
     }
   }
-
-  static async updateProduct() {}
 
   static async updateProduct(req, res) {
     try {
