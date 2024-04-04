@@ -135,9 +135,9 @@ const addProduct = async (data, userId) => {
           unitId: product.unit_id,
           lastUpdatedBy: userId, // Use the provided user ID
           lastRestockDate: new Date(),
-          buyingPrice: data.buying_price, // Add the new buying price field
-          sellingPrice: data.selling_price, // Add the new selling price field
-          supplierId: data.supplier_id, // Add the new supplier ID field
+          buying_price: data.buying_price, // Add the new buying price field
+          selling_price : data.selling_price, // Add the new selling price field
+          supplier_id: data.supplier_id, // Add the new supplier ID field
         },
         { transaction: t }
       );
