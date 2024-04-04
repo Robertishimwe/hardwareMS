@@ -127,6 +127,7 @@ const addProduct = async (data, userId) => {
       }, { transaction: t });
 
       // Create the corresponding Inventory entry within the same transaction
+      console.log(data.buying_price)
       await Inventory.create(
         {
           productId: product.id,
