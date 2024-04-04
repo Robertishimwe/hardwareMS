@@ -9,6 +9,7 @@ module.exports = {
       {
         type: Sequelize.DECIMAL,
         allowNull: false,
+        defaultValue: 0
       }
     ).then(() => {
       return queryInterface.addColumn(
@@ -17,6 +18,7 @@ module.exports = {
         {
           type: Sequelize.DECIMAL,
           allowNull: false,
+          defaultValue: 0
         }
       );
     }).then(() => {
