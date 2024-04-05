@@ -163,14 +163,14 @@ class ProductController {
           minimumStockLevel,
           lastRestockDate,
           lastUpdatedBy,
-          product: { supplier },
+          Supplier
         } = product;
   
         return {
           ProductName: product_name,
           Description: description,
           Category: productCategory.name,
-          Supplier: supplier.name,
+          Supplier: Supplier.name,
           Unit: unit.unit_name,
           buying_price,
           selling_price,
