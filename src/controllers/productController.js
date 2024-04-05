@@ -80,68 +80,68 @@ class ProductController {
     }
   }
 
-  // static async getProductsController(req, res) {
-  //   try {
-  //     const searchParams = req.query;
-  //     const products = await ProductService.getProducts(searchParams);
-
-  //     if (!products || products.length === 0) {
-  //       return res.status(404).json({ error: "Products not found" });
-  //     }
-
-  //     res.status(200).json(products);
-  //   } catch (error) {
-  //     res
-  //       .status(500)
-  //       .json({ error: "Error finding products", details: error.message });
-  //   }
-  // }
-
   static async getProductsController(req, res) {
     try {
       const searchParams = req.query;
       const products = await ProductService.getProducts(searchParams);
-  
+
       if (!products || products.length === 0) {
         return res.status(404).json({ error: "Products not found" });
       }
-  
-      const transformedProducts = products.map((product) => {
-        const {
-          product: { id, product_name, description, category },
-          buying_price,
-          selling_price,
-          quantity,
-          minimumStockLevel,
-          lastRestockDate,
-          lastUpdatedBy,
-          unit: { unit_name },
-          product: { productCategory, supplier },
-        } = product;
-  
-        return {
-          id: id,
-          ProductName: product_name,
-          Description: description,
-          Category: productCategory.name,
-          Supplier: supplier.name,
-          Unit: unit_name,
-          buying_price,
-          selling_price,
-          Quantity: quantity,
-          MinimumStockLevel: minimumStockLevel,
-          LastRestockDate: lastRestockDate,
-          LastUpdatedBy: lastUpdatedBy,
-        };
-      });
-  
-      res.status(200).json(transformedProducts);
+
+      res.status(200).json(products);
     } catch (error) {
       res
         .status(500)
         .json({ error: "Error finding products", details: error.message });
     }
   }
+
+  // static async getProductsController(req, res) {
+  //   try {
+  //     const searchParams = req.query;
+  //     const products = await ProductService.getProducts(searchParams);
+  
+  //     if (!products || products.length === 0) {
+  //       return res.status(404).json({ error: "Products not found" });
+  //     }
+  
+  //     const transformedProducts = products.map((product) => {
+  //       const {
+  //         product: { id, product_name, description, category },
+  //         buying_price,
+  //         selling_price,
+  //         quantity,
+  //         minimumStockLevel,
+  //         lastRestockDate,
+  //         lastUpdatedBy,
+  //         unit: { unit_name },
+  //         product: { productCategory, supplier },
+  //       } = product;
+  
+  //       return {
+  //         id: id,
+  //         ProductName: product_name,
+  //         Description: description,
+  //         Category: productCategory.name,
+  //         Supplier: supplier.name,
+  //         Unit: unit_name,
+  //         buying_price,
+  //         selling_price,
+  //         Quantity: quantity,
+  //         MinimumStockLevel: minimumStockLevel,
+  //         LastRestockDate: lastRestockDate,
+  //         LastUpdatedBy: lastUpdatedBy,
+  //       };
+  //     });
+  
+  //     res.status(200).json(transformedProducts);
+  //   } catch (error) {
+  //     res
+  //       .status(500)
+  //       .json({ error: "Error finding products", details: error.message });
+  //   }
+  // }
   
 
   static async HardDeleteProduct(req, res) {
