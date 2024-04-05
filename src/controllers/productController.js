@@ -170,7 +170,7 @@ class ProductController {
           ProductName: product_name,
           Description: description,
           Category: productCategory.name,
-          Supplier: Supplier.name,
+          Supplier: Supplier.supplierName,
           Unit: unit.unit_name,
           buying_price,
           selling_price,
