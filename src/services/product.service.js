@@ -141,7 +141,7 @@ class ProductService {
           {
             model: Supplier,
             as: 'Supplier',
-            attributes: ['name'], // Include only the name field from Supplier
+            attributes: ['supplierName'], // Include only the name field from Supplier
           },
         ],
         attributes: [
