@@ -156,7 +156,7 @@ class ProductController {
   
       const transformedProducts = products.map((product) => {
         const {
-          product: { product_name, description, category, unit, productCategory },
+          product: { id, product_name, description, category, unit, productCategory },
           buying_price,
           selling_price,
           quantity,
@@ -167,6 +167,7 @@ class ProductController {
         } = product;
   
         return {
+          id: id,
           ProductName: product_name,
           Description: description,
           Category: productCategory.name,
