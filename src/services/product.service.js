@@ -50,6 +50,70 @@ class ProductService {
     }
   }
 
+  // static async getProducts(searchParams) {
+  //   try {
+  //     const products = await Inventory.findAll({
+  //       where: searchParams,
+  //       include: [
+  //         {
+  //           model: Product,
+  //           as: "product",
+  //           attributes: {
+  //             exclude: [
+  //               "id",
+  //               "unit_id",
+  //               "createdAt",
+  //               "supplier_id",
+  //             ], // Exclude unnecessary fields from Product
+  //           },
+  //           include: [
+  //             {
+  //               model: Category,
+  //               as: 'productCategory',
+  //               attributes: {
+  //                 exclude: ['id', 'createdAt', 'updatedAt'], // Exclude unnecessary fields from Category
+  //               },
+  //             },
+  //             { model: UnitOfMeasurements, as: 'unit' },
+  //           ],
+  //         },
+  //         {
+  //           model: User,
+  //           as: "User",
+  //           attributes: {
+  //             exclude: [
+  //               "password",
+  //               "createdAt",
+  //               "updatedAt",
+  //               "phone",
+  //               "role",
+  //               "id",
+  //             ], // Exclude sensitive fields from User
+  //           },
+  //         },
+  //         {
+  //           model: UnitOfMeasurements,
+  //           as: "unit",
+  //           attributes: {
+  //             exclude: ["id", "createdAt", "updatedAt"], // Exclude unnecessary fields from UnitOfMeasurements in Inventory
+  //           },
+  //         },
+  //       ],
+  //       attributes: {
+  //         exclude: [
+  //           "productId",
+  //           "unitId",
+  //           "createdAt",
+  //         ], // Exclude redundant fields from Inventory
+  //       },
+  //     });
+  //     return products;
+  //   } catch (error) {
+  //     throw new Error(error);
+  //   }
+  // }
+
+
   static async getProducts(searchParams) {
     try {
       const products = await Inventory.findAll({
@@ -58,60 +122,41 @@ class ProductService {
           {
             model: Product,
             as: "product",
-            attributes: {
-              exclude: [
-                "id",
-                "unit_id",
-                "createdAt",
-                "supplier_id",
-              ], // Exclude unnecessary fields from Product
-            },
+            attributes: ['product_name', 'description', 'category'], // Include only these fields from Product
             include: [
               {
                 model: Category,
                 as: 'productCategory',
-                attributes: {
-                  exclude: ['id', 'createdAt', 'updatedAt'], // Exclude unnecessary fields from Category
-                },
+                attributes: ['name'], // Include only the name field from Category
               },
-              { model: UnitOfMeasurements, as: 'unit' },
+              {
+                model: Supplier,
+                as: 'supplier',
+                attributes: ['name'], // Include only the name field from Supplier
+              },
+              {
+                model: UnitOfMeasurements,
+                as: 'unit',
+                attributes: ['unit_name'], // Include only the unit_name field from UnitOfMeasurements
+              },
             ],
           },
-          {
-            model: User,
-            as: "User",
-            attributes: {
-              exclude: [
-                "password",
-                "createdAt",
-                "updatedAt",
-                "phone",
-                "role",
-                "id",
-              ], // Exclude sensitive fields from User
-            },
-          },
-          {
-            model: UnitOfMeasurements,
-            as: "unit",
-            attributes: {
-              exclude: ["id", "createdAt", "updatedAt"], // Exclude unnecessary fields from UnitOfMeasurements in Inventory
-            },
-          },
         ],
-        attributes: {
-          exclude: [
-            "productId",
-            "unitId",
-            "createdAt",
-          ], // Exclude redundant fields from Inventory
-        },
+        attributes: [
+          'buying_price',
+          'selling_price',
+          'quantity',
+          'minimumStockLevel',
+          'lastRestockDate',
+          'lastUpdatedBy',
+        ], // Include only these fields from Inventory
       });
       return products;
     } catch (error) {
       throw new Error(error);
     }
   }
+  
 
   static async checkProduct(params) {
     try {
