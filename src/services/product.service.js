@@ -140,7 +140,7 @@ class ProductService {
           },
           {
             model: Supplier,
-            as: 'supplier',
+            as: 'Supplier',
             attributes: ['name'], // Include only the name field from Supplier
           },
         ],
