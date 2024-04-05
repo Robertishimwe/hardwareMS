@@ -120,7 +120,7 @@ class ProductController {
         } = product;
   
         return {
-          id: product.id,
+          id: id,
           ProductName: product_name,
           Description: description,
           Category: productCategory.name,
