@@ -129,17 +129,19 @@ class ProductService {
                 as: 'productCategory',
                 attributes: ['name'], // Include only the name field from Category
               },
-              {
-                model: Supplier,
-                as: 'supplier',
-                attributes: ['name'], // Include only the name field from Supplier
-              },
+
               {
                 model: UnitOfMeasurements,
                 as: 'unit',
                 attributes: ['unit_name'], // Include only the unit_name field from UnitOfMeasurements
               },
+
             ],
+          },
+          {
+            model: Supplier,
+            as: 'supplier',
+            attributes: ['name'], // Include only the name field from Supplier
           },
         ],
         attributes: [
