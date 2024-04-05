@@ -80,6 +80,23 @@ class ProductController {
     }
   }
 
+  static async getProductsController(req, res) {
+    try {
+      const searchParams = req.query;
+      const products = await ProductService.getProducts(searchParams);
+
+      if (!products || products.length === 0) {
+        return res.status(404).json({ error: "Products not found" });
+      }
+
+      res.status(200).json(products);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ error: "Error finding products", details: error.message });
+    }
+  }
+
   static async HardDeleteProduct(req, res) {
     try {
       const { id } = req.params;

@@ -10,6 +10,7 @@ const router = express.Router();
 // router.post("/create",checkAdminOrManager, productValidation.verifyProduct, productController.createProduct)
 router.post("/create",checkAdminOrManager, productController.createProduct)
 router.get('/getAll', productController.findProducts)
+router.get('/', productController.getProductsController)
 router.patch('/update/:productId',checkAdminOrManager, productController.updateProduct)
 router.delete("/delete/:id",checkAdminOrManager, productController.HardDeleteProduct)
 

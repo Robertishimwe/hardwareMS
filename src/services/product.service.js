@@ -1,4 +1,4 @@
-const { Product, Category, Supplier, UnitOfMeasurements } = require("../database/models");
+const { Product, Category, Supplier,Inventory, UnitOfMeasurements } = require("../database/models");
 
 class ProductService {
   static async createProduct(data) {
@@ -47,6 +47,69 @@ class ProductService {
     } catch (error) {
       console.log(error)
       throw new Error("Error finding products", error);
+    }
+  }
+
+  static async getProducts(searchParams) {
+    try {
+      const products = await Inventory.findAll({
+        where: searchParams,
+        include: [
+          {
+            model: Product,
+            as: "product",
+            attributes: {
+              exclude: [
+                "id",
+                "unit_id",
+                "createdAt",
+                "supplier_id",
+              ], // Exclude unnecessary fields from Product
+            },
+            include: [
+              {
+                model: Category,
+                as: 'productCategory',
+                attributes: {
+                  exclude: ['id', 'createdAt', 'updatedAt'], // Exclude unnecessary fields from Category
+                },
+              },
+              { model: UnitOfMeasurements, as: 'unit' },
+            ],
+          },
+          {
+            model: User,
+            as: "User",
+            attributes: {
+              exclude: [
+                "password",
+                "createdAt",
+                "updatedAt",
+                "phone",
+                "role",
+                "id",
+              ], // Exclude sensitive fields from User
+            },
+          },
+          {
+            model: UnitOfMeasurements,
+            as: "unit",
+            attributes: {
+              exclude: ["id", "createdAt", "updatedAt"], // Exclude unnecessary fields from UnitOfMeasurements in Inventory
+            },
+          },
+        ],
+        attributes: {
+          exclude: [
+            "productId",
+            "unitId",
+            "createdAt",
+          ], // Exclude redundant fields from Inventory
+        },
+      });
+      return products;
+    } catch (error) {
+      throw new Error(error);
     }
   }
 
