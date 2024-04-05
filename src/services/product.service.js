@@ -122,7 +122,7 @@ class ProductService {
           {
             model: Product,
             as: "product",
-            attributes: ['product_name', 'description', 'category'], // Include only these fields from Product
+            attributes: ['id','product_name', 'description', 'category'], // Include only these fields from Product
             include: [
               {
                 model: Category,
