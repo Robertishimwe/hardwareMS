@@ -1,6 +1,19 @@
 const { sequelize, Inventory, Transaction } = require("../database/models");
 
-const incrementInventory = async (productId, amount, userId) => {
+const incrementInventory = async (productId, amount, userId, buying_price, selling_price, supplier_id) => {
+
+  // productId: DataTypes.INTEGER,
+  // quantity: DataTypes.DECIMAL,
+  // unitId: DataTypes.INTEGER,
+  // minimumStockLevel: DataTypes.DECIMAL,
+  // lastUpdatedBy: DataTypes.INTEGER,
+  // lastRestockDate: DataTypes.DATE,
+  // buying_price: DataTypes.DECIMAL, 
+  // selling_price: DataTypes.DECIMAL, 
+  // supplier_id: DataTypes.INTEGER,
+
+
+
   try {
     const updatedInventory = await sequelize.transaction(async (t) => {
       const inventory = await Inventory.findOne({
@@ -17,6 +30,9 @@ const incrementInventory = async (productId, amount, userId) => {
       const updatedQuantity = parseInt(inventory.quantity) + parseInt(amount);
       inventory.quantity = updatedQuantity;
       inventory.lastUpdatedBy = userId
+      inventory.buying_price = buying_price
+      inventory.selling_price = selling_price
+      inventory.supplier_id = supplier_id
       await inventory.save({ transaction: t });
 
       // Record the transaction in the Transaction table
@@ -28,6 +44,7 @@ const incrementInventory = async (productId, amount, userId) => {
           quantity_sold: amount,
           transaction_type:'IN',
           transaction_date: new Date(),
+
         },
         { transaction: t }
       );
