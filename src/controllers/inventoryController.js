@@ -9,7 +9,7 @@ class InventoryController {
     const { id } = req.user;
 
     try {
-      const result = await incrementInventory(productId, amount, id);
+      const result = await incrementInventory(productId, amount, id, buying_price, selling_price, supplier_id);
       return res.status(200).json({ message: "stock was added", result });
     } catch (error) {
       console.log(error);
