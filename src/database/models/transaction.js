@@ -28,6 +28,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         as: 'user', // for descriptive queries
       });
+
+      Transaction.belongsTo(models.Supplier, {
+        foreignKey: 'supplier_id',
+        onDelete: 'CASCADE',
+        as: 'supplier', // for descriptive queries
+      });
       // define association here
     }
   }
@@ -37,7 +43,8 @@ module.exports = (sequelize, DataTypes) => {
     inventory_id: DataTypes.INTEGER,
     quantity_sold: DataTypes.DECIMAL,
     transaction_date: DataTypes.DATE,
-    transaction_type: DataTypes.STRING
+    transaction_type: DataTypes.STRING,
+    supplier_id:  DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Transaction',
