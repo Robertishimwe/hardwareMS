@@ -5,7 +5,7 @@ const InventoryService = require("../services/inventory.service");
 class InventoryController {
   static async increment(req, res) {
     const product = req.body;
-    const { productId, amount } = product[0];
+    const { productId, amount, buying_price, selling_price, supplier_id } = product[0];
     const { id } = req.user;
 
     try {
