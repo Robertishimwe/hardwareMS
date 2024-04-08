@@ -42,8 +42,10 @@ const incrementInventory = async (productId, amount, userId, buying_price, selli
           user_id: userId,
           product_id: productId,
           quantity_sold: amount,
+          price: amount * inventory.buying_price,
           transaction_type:'IN',
           transaction_date: new Date(),
+          supplier_id: inventory.supplier_id
 
         },
         { transaction: t }

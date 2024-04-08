@@ -44,7 +44,8 @@ module.exports = (sequelize, DataTypes) => {
     quantity_sold: DataTypes.DECIMAL,
     transaction_date: DataTypes.DATE,
     transaction_type: DataTypes.STRING,
-    supplier_id:  DataTypes.STRING
+    supplier_id:  DataTypes.STRING,
+    price: DataTypes.DECIMAL
   }, {
     sequelize,
     modelName: 'Transaction',
