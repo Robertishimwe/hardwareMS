@@ -17,7 +17,6 @@ class InventoryService {
             as: "product",
             attributes: {
               exclude: [
-                "id",
                 "unit_id",
                 "createdAt",
                 "supplier_id",
