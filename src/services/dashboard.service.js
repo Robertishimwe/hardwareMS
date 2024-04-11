@@ -1,39 +1,36 @@
 const { Transaction, User, Product, Sequelize } = require("../database/models");
 
 class dashboardService {
-  static async getTotalSales(startDate, endDate) {
+  static async getTotalSalesByDate(startDate, endDate) {
     try {
+      // const today = new Date();
+      // const startDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      // const endDate = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59);
+  
       const transactions = await Transaction.findAll({
         where: {
           transaction_date: {
             [Sequelize.Op.between]: [startDate, endDate]
           },
           transaction_type: 'OUT'
-        },
-        include: [
-          {
-            model: Product,
-            as: 'product',
-            attributes: ['price'] 
-          }
-        ]
+        }
       });
-
+  
       let totalSales = 0;
       for (const transaction of transactions) {
         const quantitySold = parseInt(transaction.quantity_sold);
-        const price = parseFloat(transaction.product.price); // Accessing the price of the associated product
-
+        const price = parseFloat(transaction.price);
+  
         if (!isNaN(quantitySold) && !isNaN(price)) {
-          totalSales += quantitySold * price; // Multiply quantity sold with price and add to totalSales
+          totalSales += quantitySold * price;
         } else {
           console.log(`Invalid quantity or price for transaction ID: ${transaction.id}`);
         }
       }
-
+  
       return totalSales;
     } catch (error) {
-      throw new Error(`Error calculating total sales: ${error.message}`);
+      throw new Error(`Error calculating today's sales: ${error.message}`);
     }
   }
 
@@ -67,7 +64,6 @@ class dashboardService {
       throw new Error(`Error getting most selling product: ${error.message}`);
     }
   }
-  
 }
 
 module.exports = dashboardService;
