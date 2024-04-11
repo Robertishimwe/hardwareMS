@@ -91,8 +91,9 @@ const decrementInventory = async (transactions, userId) => {
             inventory_id: inventory.id,
             user_id: userId,
             product_id: productId,
+            price: inventory.selling_price,
             transaction_type:'OUT',
-            quantity_sold: -amount, // Negative value for deduction
+            quantity_sold: amount, // Negative value for deduction
             transaction_date: new Date(),
           },
           { transaction: t }
