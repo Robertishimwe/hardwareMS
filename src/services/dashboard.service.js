@@ -25,7 +25,7 @@ class dashboardService {
         const price = parseFloat(transaction.product.price); // Accessing the price of the associated product
 
         if (!isNaN(quantitySold) && !isNaN(price)) {
-          totalSales += quantitySold * price * -1; // Multiply quantity sold with price and add to totalSales
+          totalSales += quantitySold * price; // Multiply quantity sold with price and add to totalSales
         } else {
           console.log(`Invalid quantity or price for transaction ID: ${transaction.id}`);
         }
