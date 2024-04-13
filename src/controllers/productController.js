@@ -165,13 +165,15 @@ class ProductController {
           lastUpdatedBy,
           Supplier
         } = product;
+
+        console.log(">>>>>>>><<<<<<<<<<<<<<", Supplier)
   
         return {
           id: id,
           ProductName: product_name,
           Description: description,
           Category: productCategory.name,
-          Supplier: Supplier.supplierName,
+          Supplier: Supplier?.supplierName,
           Unit: unit.unit_name,
           buying_price,
           selling_price,
