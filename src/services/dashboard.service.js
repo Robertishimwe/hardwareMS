@@ -51,7 +51,7 @@ class dashboardService {
         ],
         attributes: ['product_id', [Sequelize.fn('SUM', Sequelize.col('quantity_sold')), 'total_sold']],
         group: ['product_id'],
-        order: [[Sequelize.literal('total_sold'), 'ASC']],
+        order: [[Sequelize.literal('total_sold'), 'DESC']],
         limit: 4
       });
   
