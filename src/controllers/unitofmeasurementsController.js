@@ -1,4 +1,6 @@
-const UnitOfMeasurementsService = require('../services/unitofmeasurements.service')
+const req = require('express/lib/request');
+const UnitOfMeasurementsService = require('../services/unitofmeasurements.service');
+const res = require('express/lib/response');
 
 const { createUnitOfMeasurement, updateUnitOfMeasurement, findUnitsOfMeasurement, findUnitOfMeasurement, checkUnitOfMeasurement } = UnitOfMeasurementsService
 
@@ -37,6 +39,24 @@ class UnitOfMeasurementsController {
         } catch (error) {
             res.status(500).json({ error });
         }
+    }
+
+    static updateUnitOfMeasurement = async(req, res) =>{
+        try {
+            const { id } = req.params;
+            const unit = await findUnitOfMeasurement({ id });
+      
+            if (!unit) {
+              return res.status(404).json({ error: "Unit not found" });
+            }
+      
+            const updatedUnit = await updateUnitOfMeasurement(unit, req.body);
+            return res
+              .status(200)
+              .json({ message: "Unit updated successfully", updatedUnit });
+          } catch (error) {
+            res.status(500).json({ error: error.message });
+          }
     }
 
 }
