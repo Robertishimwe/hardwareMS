@@ -56,6 +56,7 @@ class UsersController {
             }
     
             const updatedUser = await updateUser(userId, updateData);
+            delete updatedUser.password;
             res.status(200).json(updatedUser);
         } catch (error) {
             res.status(400).json({ message: error.message });
