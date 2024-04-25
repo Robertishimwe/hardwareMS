@@ -47,7 +47,7 @@ class SupplierController {
             const { id } = req.params;
             const Supplier = await findSupplier({ id });
       
-            if (!unit) {
+            if (!Supplier) {
               return res.status(404).json({ error: "Supplier not found" });
             }
       
