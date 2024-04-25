@@ -42,6 +42,24 @@ class SupplierController {
         }
     }
 
+    static updateSupplier = async (req, res) => {
+        try {
+            const { id } = req.params;
+            const Supplier = await findSupplier({ id });
+      
+            if (!unit) {
+              return res.status(404).json({ error: "Supplier not found" });
+            }
+      
+            const updatedSupplier = await updateSupplier(Supplier, req.body);
+            return res
+              .status(200)
+              .json({ message: "Supplier updated successfully", updatedSupplier });
+          } catch (error) {
+            res.status(500).json({ error: error.message });
+          }
+    }
+
 }
 
 module.exports = SupplierController;
